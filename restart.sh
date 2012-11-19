@@ -1,0 +1,1 @@
+../../ozx/ozjapanese/ozjapanese_com_au/restart.sh

@@ -1,0 +1,28 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+ja:
+  hello: "Hello world"
+  lang:
+    en: 英語
+    jp: 日本語
+    ko: 韓国語
+  brand:
+    project: "KoolBz"
+  beads:
+    selection: "ビーズ　ラインナップ"
+    special: "スペシャル"
+    regular: "分類別"
+    ring:
+      headline: "世界にたった一つ。"
+      leadline: "Have you been looking for a ring that is only made for you to shine only you?"
+    character:
+      headline: "The couple. Never decoupled as you have them."
+      leadline: "Original Character"
+    combination:
+      headline: "The two. Hundreds of combinations you choose from."
+      leadline: "Original Character"
+  auth:
+    signin_with: "Signin With"
+    signout: "Signout"
+  

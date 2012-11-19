@@ -1,0 +1,115 @@
+.showcase .carousel-inner {
+  background-color: #000;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#000)); /* Safari 4+, Chrome */
+  background-image: -webkit-linear-gradient(top, #f2f2f2, #000); /* Chrome 10+, Safari 5.1+, iOS 5+ */
+  background-image:    -moz-linear-gradient(top, #f2f2f2, #000); /* Firefox 3.6-15 */
+  background-image:      -o-linear-gradient(top, #f2f2f2, #000); /* Opera 11.10-12.00 */
+  background-image:         linear-gradient(to bottom, #f2f2f2, #000); /* Firefox 16+, IE10, Opera 12.50+ */
+}
+
+.showcase .item {
+  height: 500px;
+}
+.showcase img {
+  min-width: 100%;
+  height: 500px;
+}
+.showcase .navbar-inner a.brand {
+  font-size: 25px;
+}
+.showcase .carousel-caption h1{
+  color: #ffffff;
+}
+
+.itemcase .thumbnails {
+  padding: 20px;
+}
+
+.itemcase .box_shadow {
+  -webkit-box-shadow: 0px 0px 4px 0px #ffffff; /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+          box-shadow: 0px 0px 4px 0px #ffffff; /* Opera 10.5, IE9+, Firefox 4+, Chrome 6+, iOS 5 */
+}
+
+.itemcase .box_opacity {
+  opacity: 0.3; /* Chrome 4+, Firefox 2+, Safari 3.1+, Opera 9+, IE9+, iOS 3.2+, Android 2.1+ */
+}
+
+.item-background {
+  background-color: #000;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#000)); /* Safari 4+, Chrome */
+  background-image: -webkit-linear-gradient(top, #f2f2f2, #000); /* Chrome 10+, Safari 5.1+, iOS 5+ */
+  background-image:    -moz-linear-gradient(top, #f2f2f2, #000); /* Firefox 3.6-15 */
+  background-image:      -o-linear-gradient(top, #f2f2f2, #000); /* Opera 11.10-12.00 */
+  background-image:         linear-gradient(to bottom, #f2f2f2, #000); /* Firefox 16+, IE10, Opera 12.50+ */
+}
+
+.mycube {
+  background-color: #ffffff;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#41A317), to(#ffffff)); /* Safari 4+, Chrome */
+  background-image: -webkit-linear-gradient(top, #41A317, #ffffff); /* Chrome 10+, Safari 5.1+, iOS 5+ */
+  background-image:    -moz-linear-gradient(top, #41A317, #ffffff); /* Firefox 3.6-15 */
+  background-image:      -o-linear-gradient(top, #41A317, #ffffff); /* Opera 11.10-12.00 */
+  background-image:         linear-gradient(to bottom, #41A317, #ffffff); /* Firefox 16+, IE10, Opera 12.50+ */
+}
+
+.text-center {
+  text-align: center;
+}
+
+.shopping-cart .close {
+  color: #ffffff;
+  opacity: 1;
+}
+
+.shopping-cart .thumbnail span {
+  visibility: hidden;
+  position: absolute;
+}
+
+.shopping-cart .thumbnail:hover span {
+  visibility: visible;
+  z-index: 100;
+}
+
+.shopping-cart .thumbnail-fadeout {
+    transform: rotate(0deg) scale(1);
+    opacity: 0;
+    transition: all 0.3s ease-out;
+    transform: translateY(-200px) rotate(180deg);
+}
+
+.shopping-cart .thumbnail-fadein {
+  -webkit-animation: thumbnail_trans 3s ; /* Safari 5, Chrome */
+     -moz-animation: thumbnail_trans 3s ; /* Firefox 5-15 */
+       -o-animation: thumbnail_trans 3s ; /* Opera 12+ */
+          animation: thumbnail_trans 3s ; /* Safari 5, Chrome, Firefox 16+ */
+}
+
+@-webkit-keyframes thumbnail_trans {
+  0%   { transform: translateX(900px) rotate(0deg); transition-delay: 0.1s; }
+  25%  { transform: translateX(600px) rotate(90deg); transition-delay: 0.1s; }
+  50%  { transform: translateX(300px) rotate(180deg); transition-delay: 0.1s; }
+  50%  { transform: translateX(300px) rotate(270deg); transition-delay: 0.1s; }
+  100% { transform: translateX(000px) rotate(360deg); transition-delay: 0.1s; }
+}
+@-moz-keyframes thumbnail_trans {
+  0%   { transform: translateX(900px) rotate(0deg); transition-delay: 0.1s; }
+  25%  { transform: translateX(600px) rotate(90deg); transition-delay: 0.1s; }
+  50%  { transform: translateX(300px) rotate(180deg); transition-delay: 0.1s; }
+  50%  { transform: translateX(300px) rotate(270deg); transition-delay: 0.1s; }
+  100% { transform: translateX(000px) rotate(360deg); transition-delay: 0.1s; }
+}
+@-o-keyframes thumbnail_trans {
+  0%   { transform: translateX(900px) rotate(0deg); transition-delay: 0.1s; }
+  25%  { transform: translateX(600px) rotate(90deg); transition-delay: 0.1s; }
+  50%  { transform: translateX(300px) rotate(180deg); transition-delay: 0.1s; }
+  50%  { transform: translateX(300px) rotate(270deg); transition-delay: 0.1s; }
+  100% { transform: translateX(000px) rotate(360deg); transition-delay: 0.1s; }
+}
+@keyframes thumbnail_trans {
+  0%   { transform: translateX(900px) rotate(0deg); transition-delay: 0.1s; }
+  25%  { transform: translateX(600px) rotate(90deg); transition-delay: 0.1s; }
+  50%  { transform: translateX(300px) rotate(180deg); transition-delay: 0.1s; }
+  50%  { transform: translateX(300px) rotate(270deg); transition-delay: 0.1s; }
+  100% { transform: translateX(000px) rotate(360deg); transition-delay: 0.1s; }
+}

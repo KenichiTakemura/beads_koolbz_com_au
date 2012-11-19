@@ -1,0 +1,43 @@
+<div class="container-fluid">
+	<div class="row-fluid shopping-cart" >
+		<p><span class="label label-info"><i class="icon-shopping-cart icon-white"></i><%=t("cart.mycart")%></span>
+			<span class="label" id="mycart_total_price">
+			<% if @mycart.present? && @mycart.item.present? %>
+				<%=show_total_price()%>
+			<% else %>
+				<%= t("cart.noitem")%>
+			<% end %>
+			</span>
+			<div id="mycart">
+			<%=show_cart(false)%>
+			</div>
+		</p>
+	</div>
+	<div class="row-fluid">
+		<div class="">
+			<!-- Carousel
+			================================================== -->
+			<div id="itemCarousel" class="carousel itemcase slide">
+				<div class="carousel-inner">
+					<% @items.each_with_index do |item,i| %>
+					<% token = Common.unique_token %>
+					<div class="item" id="<%="#{token}_#{item.id}"%>">
+						<ul class="thumbnails" >
+							<%= show_itemcase(@items,i)%>
+						</ul>
+					</div>
+					<% end %>
+				</div>
+				<a class="left carousel-control" href="#itemCarousel" data-slide="prev">&lsaquo;</a>
+				<a class="right carousel-control" href="#itemCarousel" data-slide="next">&rsaquo;</a>
+			</div><!-- /.carousel -->
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="container">
+			<div class="span6" id="items_desc">
+				<%= show_itemdesc(@items.first)%>
+			</div>
+		</div>
+	</div>
+</div>

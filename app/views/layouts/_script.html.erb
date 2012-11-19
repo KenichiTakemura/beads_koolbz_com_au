@@ -1,0 +1,7 @@
+<%= _script_document_ready(%Q|
+	$('\#to_about').click(function(){$('html, body').animate({scrollTop: $("\#about").offset().top}, 2000);});
+	$('\#to_shop_direct').click(function(){$('html, body').animate({scrollTop: $("\#shop_direct").offset().top}, 2000);});
+	$('\#to_shop_online').click(function(){$('html, body').animate({scrollTop: $("\#shop_online").offset().top}, 2000);});
+	$('\#showcaseCarousel').carousel({pause:"hover",interval:10000});	
+|)%>
+

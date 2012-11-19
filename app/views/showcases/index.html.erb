@@ -1,0 +1,120 @@
+<!-- Carousel
+================================================== -->
+<div id="showcaseCarousel" class="carousel showcase slide">
+	<div class="carousel-inner">
+		<% @carousels.each_with_index do |carousel,i| %>
+		<% next if !carousel.has_image? %>
+		<% active = i == 0 ? "active" : "" %>
+		<div class="item <%= active%>">
+			<div class="container">
+				<div class="span1"></div>
+				<div class="span10">
+					<%= image_tag(carousel.image.first.original_image)%>
+					<div class="container">
+						<div class="carousel-caption">
+							<h1><%= t(carousel.headline)%></h1>
+							<% if carousel.leadline.present? %>
+							<p class="lead">
+								<%= t(carousel.leadline)%>
+							</p>
+							<% end %>
+						</div>
+					</div>
+				</div>
+				<div class="span1"></div>
+			</div>
+		</div>
+		<% end %>
+	</div>
+	<a class="left carousel-control" href="#showcaseCarousel" data-slide="prev">&lsaquo;</a>
+	<a class="right carousel-control" href="#showcaseCarousel" data-slide="next">&rsaquo;</a>
+</div><!-- /.carousel -->
+
+<!-- Marketing messaging and featurettes
+================================================== -->
+<!-- Wrap the rest of the page in another container to center all the content. -->
+
+<div class="container marketing">
+
+	<!-- Three columns of text below the carousel -->
+	<div class="row">
+		<p class="well well-small">
+			<strong><%= t("beads.catalogue")%></strong>
+		</p>
+		<% @categories.each do |category| %>
+		<% next if !category.item.present? %>
+		<% next if !category.item.first.has_image? %>
+		<div class="span4">
+			<%= image_tag(category.item.first.image.first.medium_image, :class => "img-circle")%>
+			<h2><%= t(category.name)%></h2>
+			<p>
+				<%= t(category.headline) %>
+			</p>
+			<p>
+				<a class="btn" href="<%= Enclink.link_to(category.name)%>"><%= t("op.viewdetails")%> &raquo;</a>
+			</p>
+			<% if current_flyer %>
+			<p>
+				<a class="btn" href="#"><%= t("op.register")%> &raquo;</a>
+			</p>
+			<% end %>
+		</div><!-- /.span4 -->
+		<% end %>
+	</div><!-- /.row -->
+
+	<!-- START THE FEATURETTES -->
+
+	<hr class="featurette-divider">
+
+	<div class="featurette mycube box_round" id="shop_direct">
+		<%= image_tag("shop/direct.jpg", :class => "image-resize300_200 img-polaroid")%>
+		<h2 class="featurette-heading"><%= t("shop.direct.headline")%></h2>
+		<p class="lead">
+			<span class="muted"><%= t("shop.direct.leadline")%></span>
+		</p>
+		<p class="lead">
+			<%= t("shop.direct.whatson")%>
+		</p>
+		<%= link_to("myCube","http://www.mycubeshop.com.au",:class=>"btn btn-link")%>
+	</div>
+
+	<hr class="featurette-divider">
+
+	<div class="featurette" id="shop_online">
+		<%= image_tag("shop/online.jpg", :class => "image-resize300_200 img-polaroid" )%>
+		<h2 class="featurette-heading"><%= t("shop.online.headline")%></h2>
+		<p class="lead">
+			<span class="muted"><%= t("shop.online.leadline")%></span>
+		</p>
+		<p class="lead">
+			<%= t("shop.online.whatson")%>
+		</p>
+		<p class="lead"><%= t("op.browse_item")%>
+		</p>
+		<ul class="pager">
+				<% @regular.each do |category| %>
+				<li>
+					<a href="<%= Enclink.link_to(category.name)%>" class="btn-inverse"><%= category.name %></a>
+				</li>
+				<% end %>
+			</ul>
+	</div>
+
+	<hr class="featurette-divider">
+
+	<div class="featurette" id="about">
+		<h2 class="featurette-heading"><%= t("about_us.headline")%></h2>
+		<p class="lead">
+			<span class="muted"><%= t("about_us.leadline")%></span>
+		</p>
+		<p class="lead">
+			<%= t("about_us.whatson")%>
+		</p>
+		<%= content_tag(:p, link_to(t("op.contact"), new_contact_path, :class => "btn btn-primary"))%>
+	</div>
+
+	<hr class="featurette-divider">
+
+	<!-- /END THE FEATURETTES -->
+
+</div><!-- /.container -->

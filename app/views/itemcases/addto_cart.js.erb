@@ -1,0 +1,4 @@
+$("#mycart").html("<%=escape_javascript(show_cart(true))%>");
+$("#item-focused-<%=@item.id%>").html("<%=escape_javascript(show_item_focused(@item))%>");
+$("#mycart_total_price").html("<%=escape_javascript(show_total_price())%>");
+$("#item-checkout").html("<%=escape_javascript(show_checkout())%>");

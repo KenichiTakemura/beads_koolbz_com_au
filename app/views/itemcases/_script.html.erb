@@ -1,0 +1,9 @@
+<%= _script_document_ready(%Q|
+	$('body').attr("style","background: rgb(0, 0, 0)");
+	$('footer').attr("style","color: rgb(255, 255, 255)");
+	$('\#itemCarousel').carousel({pause:"hover",interval:false});$('\#itemCarousel').carousel('next');
+    $('\#itemCarousel').bind('slid', function() {
+    	$("#items_desc").html('#{image_tag("ajax-loader.gif")}');
+        #{Ajax.post(Enclink.link_to(@category.name,"flip_item"),%Q|p:$("\#itemCarousel .active").attr("id")|)};
+      });
+|)%>

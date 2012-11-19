@@ -1,0 +1,304 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  date:
+    abbr_day_names:
+    - Sun
+    - Mon
+    - Tue
+    - Wed
+    - Thu
+    - Fri
+    - Sat
+    abbr_month_names:
+    -
+    - Jan
+    - Feb
+    - Mar
+    - Apr
+    - May
+    - Jun
+    - Jul
+    - Aug
+    - Sep
+    - Oct
+    - Nov
+    - Dec
+    day_names:
+    - Sunday
+    - Monday
+    - Tuesday
+    - Wednesday
+    - Thursday
+    - Friday
+    - Saturday
+    formats:
+      default: ! '%d-%m-%Y'
+      long: ! '%B %d, %Y'
+      short: ! '%b %d'
+    month_names:
+    -
+    - January
+    - February
+    - March
+    - April
+    - May
+    - June
+    - July
+    - August
+    - September
+    - October
+    - November
+    - December
+    order:
+    - :year
+    - :month
+    - :day
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: about 1 hour
+        other: about %{count} hours
+      about_x_months:
+        one: about 1 month
+        other: about %{count} months
+      about_x_years:
+        one: about 1 year
+        other: about %{count} years
+      almost_x_years:
+        one: almost 1 year
+        other: almost %{count} years
+      half_a_minute: half a minute
+      less_than_x_minutes:
+        one: less than a minute
+        other: less than %{count} minutes
+      less_than_x_seconds:
+        one: less than 1 second
+        other: less than %{count} seconds
+      over_x_years:
+        one: over 1 year
+        other: over %{count} years
+      x_days:
+        one: 1 day
+        other: ! '%{count} days'
+      x_minutes:
+        one: 1 minute
+        other: ! '%{count} minutes'
+      x_months:
+        one: 1 month
+        other: ! '%{count} months'
+      x_seconds:
+        one: 1 second
+        other: ! '%{count} seconds'
+    prompts:
+      day: Day
+      hour: Hour
+      minute: Minute
+      month: Month
+      second: Seconds
+      year: Year
+  errors: &errors
+    format: ! '%{attribute} %{message}'
+    messages:
+      accepted: must be accepted
+      blank: can't be blank
+      confirmation: doesn't match confirmation
+      empty: can't be empty
+      equal_to: must be equal to %{count}
+      even: must be even
+      exclusion: is reserved
+      greater_than: must be greater than %{count}
+      greater_than_or_equal_to: must be greater than or equal to %{count}
+      inclusion: is not included in the list
+      invalid: is invalid
+      less_than: must be less than %{count}
+      less_than_or_equal_to: must be less than or equal to %{count}
+      not_a_number: is not a number
+      not_an_integer: must be an integer
+      odd: must be odd
+      record_invalid: ! 'Validation failed: %{errors}'
+      taken: has already been taken
+      too_long:
+        one: is too long (maximum is 1 character)
+        other: is too long (maximum is %{count} characters)
+      too_short:
+        one: is too short (minimum is 1 character)
+        other: is too short (minimum is %{count} characters)
+      wrong_length:
+        one: is the wrong length (should be 1 character)
+        other: is the wrong length (should be %{count} characters)
+    template:
+      body: ! 'There were problems with the following fields:'
+      header:
+        one: 1 error prohibited this %{model} from being saved
+        other: ! '%{count} errors prohibited this %{model} from being saved'
+  helpers:
+    select:
+      prompt: Please select
+    submit:
+      create: Create %{model}
+      submit: Save %{model}
+      update: Update %{model}
+  number:
+    currency:
+      format:
+        delimiter: ! ','
+        format: ! '%u%n'
+        precision: 2
+        separator: .
+        significant: false
+        strip_insignificant_zeros: false
+        unit: $
+    format:
+      delimiter: ! ','
+      precision: 3
+      separator: .
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: ! '%n %u'
+        units:
+          billion: Billion
+          million: Million
+          quadrillion: Quadrillion
+          thousand: Thousand
+          trillion: Trillion
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: ! '%n %u'
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: ''
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: ! ', and '
+      two_words_connector: ! ' and '
+      words_connector: ! ', '
+  time:
+    am: am
+    formats:
+      default: ! '%a, %d %b %Y %H:%M:%S %z'
+      long: ! '%B %d, %Y %H:%M'
+      short: ! '%d %b %H:%M'
+    pm: pm
+  # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
+  activemodel:
+    errors:
+      <<: *errors
+  activerecord:
+    errors:
+      <<: *errors
+  hello: "Hello world"
+  about: "About"
+  about_us:
+    headline: "About US"
+    leadline: "We are commited to produce unique beads to all."
+    whatson: ""
+  direct_shop: "Shop Direct"
+  online_shop: "Shop Direct"
+  lang:
+    en: English
+    jp: Japanese
+    ko: Korean
+  brand:
+    project: "KoolBz"
+  carousel_1:
+    headline: "The Ring. Just for you."
+    leadline: "Have you been looking for a ring that is only made for you to shine only you?"
+  carousel_2:
+    headline: "They shine where you shine."
+    leadline: "Have you ever thought what jewelry makes you shiner?"
+  carousel_4:
+    headline: "Feel in gossip?"
+    leadline: "You are ready for a shot all the times with beads."
+  carousel_3:
+    headline: "The couple. Never decoupled as connected in beads."
+    leadline: ""
+  carousel_6:
+    headline: "The two or three or more. Hundreds of combinations you choose from."
+    leadline: ""
+  carousel_5:
+    headline: "Atmosphere of the Multicultural"
+    leadline: "Easy to become a part of them with beads."
+  shop:
+    direct:
+      headline: "We sell beads at MyCube Sunny Bank Shop."
+      leadline: "It's easy to find us. Because our cube is shiner!!"
+      whatson: "Friendly staff and lots of items at MyCube. Awesome!! We re-stock every week."
+    online:
+      headline: "Shopping online is much easlier and fun nowadays."
+      leadline: "We respect all online shoppers' right and privacy so we have cosidered how you purchase safely online."
+      whatson: "Please tell us your interest in purchase. We will reply to you. Also you can make a custormise order what you like not"
+  beads:
+    selection: "Beads Selection"
+    special: "Special"
+    regular: "Regular"
+    catalogue: "Catalogue"
+    ring:
+      headline: "Test"
+      leadline: "Test"
+  auth:
+    signin_with: "Signin With"
+  cart:
+    mycart: "My Shopping Cart"
+    noitem: "No item"
+  contact:
+    us: "Contact Us"
+    please_fillin: "Please fill in the fields below and submit. We will contact you via email."
+    user_name: "Full Name"
+    email: "Email Address"
+    phone: "Phone number"
+    phone_is_optional: "Phone number is optional"
+    subject: "Subject"
+    select_contact_type: "Please select contact reason"
+    content: "Content"
+    describe_detail: "Please fill out as much as details"
+    send: "Submit"
+    confirm_submit: "Are you sure?"
+    banner: "Advertisement"
+    general: "General Enquiry"
+    feedback: "Feedback on service and web site"
+    request: "Request for service and web site"
+    issue: "Report an issue"
+    career: "Career opportunity"
+    design: "Web site design suggestion"
+    buy: "I buy this web site"
+  op:
+    register: "Register"
+    order: "Place Order"
+    contact: "Contact Us"
+    viewdetails: "View Products"
+    update: "Update"
+    gotocart: "Add to cart"
+    browse_item: "Let's browse items"
+    removefromcart: "Remove from cart"
+    checkout: "Place Order"
+    close: x
+    inmycart: "In my cart"
+  item:
+    barcode: "Beads Item Number"
+    price: "Price exclusive GST"
+  order:
+    place: "Place Order"
+    review: "Please review beads you would like to place order"
+    price: "Price displayed is for your reference only. Price will change based on size and beads supplies. We will provide clear quote after receiving your order."
+    noitem: "Please choose beads :)"
+    total_price: "Total Price exclusive GST"
