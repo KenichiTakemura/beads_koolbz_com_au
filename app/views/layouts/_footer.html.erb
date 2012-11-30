@@ -7,3 +7,32 @@
       </footer>
 
     </div><!-- /.container -->
+    
+<%=_script_pageinit(%Q|
+
+jQuery().tap(function(e) {
+	alert("tap!!");
+	if (isJQMGhostClick(e)) {
+		return;
+	}
+});
+
+var lastclickpoint, curclickpoint;
+var isJQMGhostClick = function(event) {
+	curclickpoint = event.clientX + 'x' + event.clientY;
+	alert(curclickpoint);
+
+	if (lastclickpoint === curclickpoint) {
+		lastclickpoint = '';
+		return true;
+	} else {
+		
+		lastclickpoint = curclickpoint;
+		return false;
+	}
+}
+
+|)%>
+
+
+

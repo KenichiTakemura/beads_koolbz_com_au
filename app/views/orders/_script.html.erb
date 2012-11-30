@@ -1,0 +1,7 @@
+<%= _script(%Q|
+	function chgOrderCount(select) {
+		#{Ajax.post("/itemcases/order_count","id:select.id,count:select.value")}
+	}
+|)%>
+
+

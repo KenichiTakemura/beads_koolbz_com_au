@@ -1,18 +1,27 @@
 module ItemcasesHelper
   
   def show_total_price
-    html = %Q|#{t("order.total_price")}&nbsp;:&nbsp;#{number_to_currency(@mycart.total_price, :locale => "au")}|
+    if @mycart.present? && @mycart.has_item?
+      html = %Q|#{t("order.total_price")}&nbsp;:&nbsp;#{number_to_currency(@mycart.total_price, :locale => "au")}|
+    else
+      html = t("cart.noitem")
+    end      
+    html.html_safe
+  end
+  
+  def show_order_total_price
+    html = %Q|<strong>#{t("order.total_price")}&nbsp;#{number_to_currency(@mycart.total_price, :locale => "au")}</strong>|
     html.html_safe
   end
   
   def show_item_focused(item)
-    html = %Q|#{item.barcode}&nbsp;#{link_to_with_icon_remote(t("op.gotocart"),Enclink.link_to(@category,"addto_cart",:d => item.id),"btn btn-primary btn-small","","icon-plus icon-white")}|
+    html = %Q|#{item.barcode}&nbsp;#{link_to_with_icon_remote(t("op.gotocart"),Enclink.link_to(item.category,"addto_cart",:d => item.id),"btn btn-primary btn-small","","icon-plus icon-white")}|
     html += %Q|&nbsp;<i class="icon-shopping-cart icon-white"></i><small>#{t("op.inmycart")}</small>|
     html.html_safe
   end
   
   def show_item_outfocused(item)
-    html = %Q|#{item.barcode}&nbsp;#{link_to_with_icon_remote(t("op.gotocart"),Enclink.link_to(@category,"addto_cart",:d => item.id),"btn btn-primary btn-small","","icon-plus icon-white")}|
+    html = %Q|#{item.barcode}&nbsp;#{link_to_with_icon_remote(t("op.gotocart"),Enclink.link_to(item.category,"addto_cart",:d => item.id),"btn btn-primary btn-small","","icon-plus icon-white")}|
     html.html_safe
   end
   
@@ -56,6 +65,7 @@ module ItemcasesHelper
   
   def show_itemdesc(item)
     html = ""
+    if item.present?
     html += content_tag :blockquote do
       content_tag :dl, :class => "dl-horizontal text-info" do
         content_tag(:dt, t("item.barcode")) +
@@ -64,8 +74,9 @@ module ItemcasesHelper
         content_tag(:dd, number_to_currency(item.price_ex_gst, :locale => "au"))
       end
     end
-    if current_flyer
+    if authorized?
       html += content_tag(:p, link_to("#{t("op.update")}","#", :class => "btn"))
+    end
     end
     html.html_safe
   end

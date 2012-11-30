@@ -11,7 +11,7 @@ class Image < Attachable
    end
    },
    :url  => "/system/data/:class/:attachment/:id_partition/:style/:basename.:extension",
-   :path => ':rails_root/public/system/data/:class/:attachment/:id_partition/:style/:filename'
+   :path => ":rails_root/public/system/data/:class/:attachment/:id_partition/:style/:filename"
    
   def to_s
     super.to_s + " write_at: #{write_at} something: #{something} link_to_url: #{link_to_url} source_url: #{source_url}"
@@ -28,6 +28,21 @@ class Image < Attachable
   validates_format_of :link_to_url, :with => URI::regexp(%w(http https)), :if => Proc.new { |image| !image.link_to_url.empty? }
   validates_format_of :source_url, :with => URI::regexp(%w(http https)), :if => Proc.new { |image| !image.source_url.empty? }
 
+  scope :collect_image, lambda { |attached_by,write_at|
+    if attached_by.present?
+      where("attached_by_id = ? AND attached_id is NULL AND write_at = ?", attached_by, write_at)
+    else
+      where("attached_by_id is NULL AND attached_id is NULL AND write_at = ?", write_at)
+    end
+  }
+
+  scope :collect_unsaved_image, lambda { |attached_by,write_at|
+    if attached_by.present?
+      where("attached_by_id = ? AND attached_id is NULL AND write_at != ?", current_flyer, write_at)
+    else
+      where("attached_by_id is NULL AND attached_id is NULL AND write_at != ?", current_flyer, write_at)
+    end
+  }
   
   #Paperclip callbacks
   after_post_process :proc_geo
@@ -71,6 +86,11 @@ class Image < Attachable
   def original_image
     return self.avatar.url(:original) if self.source_url.empty?
     self.source_url
+  end
+  
+  def original_path
+    return self.avatar.path(:original) if self.source_url.empty?
+    return ""
   end
   
   def linkable?

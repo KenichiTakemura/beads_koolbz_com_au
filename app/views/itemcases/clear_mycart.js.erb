@@ -1,0 +1,8 @@
+$("#mycart").html("<%=escape_javascript(show_cart(false))%>");
+<% if @items.present? %>
+<% @items.each do |item| %>
+$("#item-focused-<%=item.id%>").html("<%=escape_javascript(show_item_outfocused(item))%>");
+<% end %>
+<% end %>
+$("#mycart_total_price").html("<%=escape_javascript(show_total_price())%>");
+$("#item-checkout").html("<%=escape_javascript(show_checkout())%>");

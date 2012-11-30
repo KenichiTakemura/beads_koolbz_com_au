@@ -46,8 +46,8 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: beads_koolbz_com_au_production
+  database: koolbzco_bead_prod1
   pool: 5
   username: root
-  password:
+  password: 
   socket: /var/lib/mysql/mysql.sock

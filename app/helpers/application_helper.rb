@@ -23,4 +23,12 @@ module ApplicationHelper
     html.html_safe
   end
 
+  def show_logo
+    html = image_tag("koolbz_logo_L9.png",:class=>"img-rounded", :class => "")
+  end
+  
+  def authorized?
+    current_flyer && BeadsKoolbzComAu::Application.config.security[:authorized].include?(current_flyer.email) 
+  end
+  
 end

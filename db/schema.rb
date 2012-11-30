@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121118112538) do
+ActiveRecord::Schema.define(:version => 20121120224900) do
 
   create_table "carousels", :force => true do |t|
     t.string   "name"
@@ -22,12 +22,14 @@ ActiveRecord::Schema.define(:version => 20121118112538) do
   end
 
   create_table "categories", :force => true do |t|
+    t.string   "key"
     t.string   "name"
     t.boolean  "special"
     t.string   "headline"
     t.string   "leadline"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "open_status"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "contacts", :force => true do |t|
@@ -69,10 +71,10 @@ ActiveRecord::Schema.define(:version => 20121118112538) do
 
   create_table "images", :force => true do |t|
     t.boolean  "is_deleted",                              :default => false
-    t.string   "avatar_content_type"
-    t.string   "avatar_file_name"
-    t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
     t.string   "medium_size"
     t.string   "thumb_size"
     t.string   "original_size"
@@ -99,6 +101,7 @@ ActiveRecord::Schema.define(:version => 20121118112538) do
   create_table "item_checkouts", :force => true do |t|
     t.integer  "ordered_by_id"
     t.string   "ordered_by_type"
+    t.integer  "order_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
@@ -107,40 +110,60 @@ ActiveRecord::Schema.define(:version => 20121118112538) do
     t.integer  "category_id"
     t.integer  "order_id"
     t.integer  "status"
-    t.integer  "order_count",     :default => 1
+    t.integer  "order_count",           :default => 1
+    t.integer  "delivered_count",       :default => 0
     t.string   "barcode"
     t.float    "price_ex_gst"
-    t.datetime "barcode_ordered"
-    t.boolean  "has_image",       :default => false
+    t.float    "subtotal_price_ex_gst"
+    t.integer  "ordered_on"
+    t.integer  "dispatched_on"
+    t.boolean  "has_image",             :default => false
     t.string   "extra"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
   end
 
   create_table "items", :force => true do |t|
     t.integer  "category_id"
     t.integer  "status"
+    t.integer  "open_status"
     t.integer  "views",           :default => 0
     t.string   "barcode"
     t.float    "price_ex_gst"
     t.float    "gst"
     t.float    "price_inc_gst"
     t.datetime "barcode_ordered"
+    t.integer  "write_at"
     t.boolean  "has_image",       :default => false
     t.string   "extra"
+    t.boolean  "main",            :default => false
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
+  end
+
+  create_table "order_infos", :force => true do |t|
+    t.string   "user_name"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "address"
+    t.text     "body"
+    t.integer  "order_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "orders", :force => true do |t|
     t.integer  "ordered_by_id"
     t.string   "ordered_by_type"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.string   "ordered_id"
+    t.integer  "ordered_on"
+    t.float    "ordered_price_ex_gst"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
   end
 
   create_table "sold_items", :force => true do |t|
-    t.datetime "sold_on"
+    t.integer  "sold_on"
     t.integer  "sold_at"
     t.integer  "sold_by"
     t.float    "price_ex_gst"

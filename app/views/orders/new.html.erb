@@ -3,17 +3,18 @@
 	<div class="page-header">
     <h1><%=t("order.place")%>&nbsp;<small><%=t("order.review")%></small></h1>
     <h6 class="text-info"><%=t("order.price")%></h6>
-    </div>
-	<table class="table">
-	<% @order.item_history.each_with_index do |item,i| %>
-	<%= content_tag :tr do %>
-		<%= content_tag :td, i+1 %>
-		<%= content_tag :td, item.image.first.medium_image %>
-		<%= content_tag :td, item.image.first.barcode %>
-		<%= content_tag :td, number_to_currency(item.price_ex_gst, :locale => "au") %>
-	<% end %>
-	<% end %>
 
-	</table>
+    <%= content_tag :div, :class => "btn-toolbar" do %>
+    <%= content_tag :div, :class => "btn-group" do %>
+    <%= link_to_with_icon(t("op.cont_shopping"), "#{showcases_path}\#shop_online", "btn btn-primary", "", "icon-shopping-cart icon-white","")%>
+    <% end %>
+    <%= content_tag :div, :class => "btn-group" do %>
+    <%= link_to_modal(t("op.confirm"), "\#confirm_order_modal", "btn btn-primary", "", "icon-check icon-white","order-confirm")%>
+    <% end %>
+	<% end %>
+	</div>
+
+	<p class="text-success" id="order_total_price"><strong><%=t("order.total_price")%>&nbsp;<%=number_to_currency(@mycart.total_price, :locale => "au")%></strong></p>
+	<%= render :partial => "orders/item_table", :locals => { :cart => @mycart } %>
 </div>
-</div>
+<%= render :partial => "orders/confirm" %>

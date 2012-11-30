@@ -1,0 +1,32 @@
+<%= form_for(@order, :remote => true) do |f| %>
+<%= form_error_messages!(@order) %>
+<%= f.fields_for @order.order_info do |order_form| %>
+<%= order_form.label :user_name, t("order.user_name"), :class => "" %>
+<%= order_form.text_field :user_name, :class => "input-xlarge" %>
+<%= order_form.label :email, t("order.email"), :class => "" %>
+<div class="input-prepend">
+	<span class="add-on">@</span><%= order_form.email_field :email, :class => "input-xlarge" %>
+</div>
+<%= order_form.label :phone, t("order.phone"), :class => "" %>
+<%= order_form.telephone_field :phone, :class => "input-medium" %>
+<span class="help-inline">
+	<p class="text-success">
+		<%= t("order.phone_is_optional")%>
+	</p></span>
+<%= order_form.label :body, t("order.content"), :class => "" %>
+<%= order_form.text_area :body, :rows => "10", :style => "width:400px" %>
+<span class="help-inline">
+	<p class="text-success">
+		<%= t("order.describe_detail")%>
+	</p></span>
+<% end %>
+<div class="left" id="order-submit">
+	<%= f.submit t("order.submit"), :class => "btn btn-primary", :id => "order-submit-button", :data => { :confirm => t('contact.confirm_submit')} %>
+</div>
+<% end %>
+<div id="order-submit-status"></div>
+<%= _script(%Q|
+$('\#order-submit-button').click(function(){
+		$('\#order-submit-status').html('#{escape_javascript(image_tag("ajax-loader.gif"))}')
+	})
+|)%>

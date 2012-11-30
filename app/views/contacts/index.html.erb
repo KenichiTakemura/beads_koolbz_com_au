@@ -1,0 +1,14 @@
+<div class="container">
+<div class="row">
+	<div class="page-header">
+    <h1><%=t("contact.thank_you")%></h1>
+    <h4 class="text-info"><%=t("contact.enjoy")%></h4>
+    <p class="muted"><%=t("contact.waitforreply")%>&nbsp;<%=t("contact.emailissend")%></small></p>
+    </div>
+    <%= content_tag :div, :class => "btn-toolbar" do %>
+    <%= content_tag :div, :class => "btn-group" do %>
+    <%= link_to_with_icon(t("op.cont_shopping"), "#{showcases_path}\#shop_online", "btn btn-primary", "", "icon-shopping-cart icon-white","")%>
+    <% end %>
+	<% end %>
+</div>
+</div>

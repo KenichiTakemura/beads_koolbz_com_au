@@ -7,7 +7,7 @@
 		<div class="navbar-inner">
 			<!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->
 			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
-			<a class="brand" href="<%=root_path(:locale => "en")%>"><%= t("brand.project")%></a>
+			<a class="brand" href="<%=root_path(:locale => "en")%>"><%=show_logo%></a>
 			<div class="nav-collapse collapse">
 				<ul class="nav">
 					<li class="active dropdown">
@@ -35,25 +35,9 @@
 					<li id="item-checkout" class="">
 						<%=show_checkout()%>
 					</li>
-
 				</ul>
 			</div><!--/.nav-collapse -->
-			<div class="nav-text pull-right">
-				<ul class="nav">
-					<% if current_flyer %>
-					<li>
-					<a href="<%=destroy_flyer_session_path%>"><%=t("auth.signout")%></a>
-					</li>
-					<% end %>
-					<li>
-						<% if !current_flyer %>
-						<a href="<%=flyer_omniauth_authorize_path(:facebook)%>"><%= t("auth.signin_with")%>&nbsp;<%= facebook%></a>
-						<% else %>
-						<%= show_flyer_header %>
-						<% end %>
-					</li>
-				</ul>
-			</div>
+			<%= render :partial => "layouts/signedin" %>
 		</div><!-- /.navbar-inner -->
 	</div><!-- /.navbar -->
 

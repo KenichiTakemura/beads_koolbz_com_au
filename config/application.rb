@@ -18,6 +18,8 @@ module BeadsKoolbzComAu
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += %W(#{config.root}/app/controllers/contact)
+    config.autoload_paths += %W(#{config.root}/app/controllers/flyer)
+    config.autoload_paths += %W(#{config.root}/app/controllers/image)
     config.autoload_paths += %W(#{config.root}/app/models/attachable)
     config.autoload_paths += %W(#{config.root}/app/models/flyer)
     config.autoload_paths += %W(#{config.root}/app/models/legacy)

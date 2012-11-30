@@ -1,0 +1,22 @@
+<div class="container">
+	<div class="row">
+		    <div class="page-header">
+    <h1><%=t("item.admin.register")%></h1>
+    </div>
+    <%= show_alert%>
+	<%= form_for(@item) do |f| %>
+	<%= form_error_messages!(@item) %>
+	<%= f.hidden_field :write_at, :id => "write_at" %>
+	<%= f.label :category_id, t("item.category"), :class => "" %>
+	<%= f.select :category_id, options_from_collection_for_select(Category.all, "id", "name", @item.category_id ), :class => "" %>
+	<%= f.label :barcode, t("item.barcode"), :class => "" %>
+	<%= f.text_field :barcode, :class => "input-xlarge" %>
+	<%= f.label :price_ex_gst, t("item.price"), :class => "" %>
+	<%= f.text_field :price_ex_gst, :class => "input-medium" %>
+	<div class="left">
+		<%= f.submit t("contact.send"), :class => "btn btn-inverse", :remote => true , :method => :post %>
+	</div>
+	<% end %>
+	</div>
+	<%= render :partial => "upload/image"%>
+</div>

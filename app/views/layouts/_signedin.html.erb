@@ -1,0 +1,16 @@
+<div class="nav-text pull-right">
+	<ul class="nav">
+		<% if current_flyer %>
+		<li>
+			<a href="<%= destroy_flyer_session_path%>"><%= t("auth.signout")%></a>
+		</li>
+		<% end %>
+		<li>
+			<% if !current_flyer %>
+			<a href="<%= flyer_omniauth_authorize_path(:facebook)%>"><%= t("auth.signin_with")%>&nbsp;<%= facebook%></a>
+			<% else %>
+			<%= show_flyer_header %>
+			<% end %>
+		</li>
+	</ul>
+</div>

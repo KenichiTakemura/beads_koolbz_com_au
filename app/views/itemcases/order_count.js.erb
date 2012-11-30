@@ -1,0 +1,2 @@
+$("#item_total_price_<%=@item.id%>").html("<%=escape_javascript(number_to_currency(@item.total_price(@count), :locale => "au"))%>");
+$("#order_total_price").html("<%=escape_javascript(show_order_total_price)%>");

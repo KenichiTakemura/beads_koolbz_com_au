@@ -1,0 +1,32 @@
+<%= t("mail.contact.confirmation_email_no_reply") %>
+<br>
+<%= t("mail.contact.confirmation_email_content1") %>
+<br>
+<br>
+<%= t("mail.contact.confirmation_email_content2") %>
+<%= t("mail.contact.confirmation_email_content3") %>
+<br>
+<br>
+<%= "#{t('mail.contact.subject')}: #{@subject}" %>
+<br>
+<br>
+<%= t("mail.contact.content") %>
+<br>
+<%= "-------------------------------------" %>
+<br>
+<%= raw(@contact.body) %>
+<br>
+<%= "-------------------------------------" %>
+<br>
+<br>
+<%= t("mail.contact.name") %>
+<br>
+<%= @contact.user_name %>
+<br>
+<%= t("mail.contact.email") %>
+<br>
+<%= @contact.email %>
+<br>
+<%= t("mail.contact.phone") %>
+<br>
+<%= @contact.phone %>

@@ -6,7 +6,7 @@ Carousel.destroy_all
   ca.save
   ca.update_attribute(:headline, ca.name + ".headline")
   ca.update_attribute(:leadline, ca.name + ".leadline")
-  Dir["#{Rails.root}/config/locales/carousel_pictures/#{ca.name}/*"].each do |filename|
+  Dir["#{Rails.root}/config/assets/carousel_pictures/#{ca.name}/*"].each do |filename|
     # skip profile name
     next if File.directory?(filename)
     puts "Importing #{filename} to #{ca.name}"
@@ -17,7 +17,7 @@ Carousel.destroy_all
 
 Category.destroy_all
 Category::CATEGORY.each do |k,v|
-  cate = Category.create(:name => v[0], :special => v[1], :headline => v[2], :leadline => v[3])
+  cate = Category.create(:key => k, :name => v[0], :special => v[1], :headline => v[2], :leadline => v[3], :open_status => Status.open_status(:public))
 end
 
 #|  1 | In Stock  | 2012-07-16 10:37:05 | 2012-07-16 10:37:05 |
@@ -52,6 +52,7 @@ LegacyItem.all.each do |item|
     cate = Category.find_by_name(Category::CATEGORY[:bracelet])
   end
   i = Item.new(:barcode => item.barcode, :price_ex_gst => item.price_ex_gst)
+  i.open_status = Status.open_status(:private)
   i.barcode_ordered = item.barcode_ordered
   i.status = item.status_id
   i.save
@@ -62,7 +63,7 @@ LegacyItem.all.each do |item|
   i.extra = item.avatar_file_name
   i.set_category(cate)
 
-  Dir["#{Rails.root}/config/locales/item_pictures/#{kate}/*"].each do |filename|
+  Dir["#{Rails.root}/config/assets/item_pictures/#{kate}/*"].each do |filename|
     if filename =~ /#{item.barcode}.*\z/
       puts "Importing #{filename} to #{cate.name}"
       image = Image.new(:avatar => File.new(filename),:link_to_url => "", :source_url => "")

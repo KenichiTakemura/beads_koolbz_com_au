@@ -22,6 +22,10 @@ class ItemHistory < ActiveRecord::Base
     has_image
   end
   
+  def total_price
+    price_ex_gst * order_count.to_i
+  end
+  
   def to_s
     "#{id} #{category.name} #{barcode} #{price_ex_gst}"
   end

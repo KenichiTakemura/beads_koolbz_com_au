@@ -56,6 +56,11 @@
   text-align: center;
 }
 
+.item-page {
+  background: rgb(0, 0, 0);
+  color: #ffffff;
+}
+
 .shopping-cart .close {
   color: #ffffff;
   opacity: 1;
@@ -83,6 +88,19 @@
      -moz-animation: thumbnail_trans 3s ; /* Firefox 5-15 */
        -o-animation: thumbnail_trans 3s ; /* Opera 12+ */
           animation: thumbnail_trans 3s ; /* Safari 5, Chrome, Firefox 16+ */
+}
+
+.image-delete {
+  font-size: 30px;
+  font-weight: 100;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  background: none repeat scroll 0% 0% rgb(34, 34, 34);
+  opacity: 0.5;
+}
+
+.koolbz-img {
+  
 }
 
 @-webkit-keyframes thumbnail_trans {

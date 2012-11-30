@@ -33,7 +33,9 @@
 <!-- Marketing messaging and featurettes
 ================================================== -->
 <!-- Wrap the rest of the page in another container to center all the content. -->
-
+<div class="container social">
+<div class="fb-like" data-href="http://bead.koolbz.com.au/" data-send="false" data-layout="button_count" data-width="350" data-show-faces="true" data-font="arial"></div>
+</div>
 <div class="container marketing">
 
 	<!-- Three columns of text below the carousel -->
@@ -41,21 +43,34 @@
 		<p class="well well-small">
 			<strong><%= t("beads.catalogue")%></strong>
 		</p>
+	</div>
+		<% if authorized? %>
+		<div class="row">
+		<p class="lead">
+		<% @categories.each do |category| %>
+		<a class="btn" href="<%=items_path(:category => category.name)%>"><%= t(category.name)%> &raquo;</a>
+		<% end %>
+		</p>
+		</div>
+		<% end %>
+		<div class="row">
 		<% @categories.each do |category| %>
 		<% next if !category.item.present? %>
-		<% next if !category.item.first.has_image? %>
-		<div class="span4">
-			<%= image_tag(category.item.first.image.first.medium_image, :class => "img-circle")%>
-			<h2><%= t(category.name)%></h2>
-			<p>
-				<%= t(category.headline) %>
+		<% next if !category.item.main_item.present? %>
+		<% next if !category.item.main_item.first.has_image? %>
+		<div class="span4 pull-left">
+			<h2 class="muted"><%= t(category.headline)%></h2>
+			<%= image_tag(category.item.main_item.first.image.first.medium_image, :class => "img-round")%>
+			<p><strong>
+				<%= t(category.leadline) %>
+				</strong>
 			</p>
 			<p>
 				<a class="btn" href="<%= Enclink.link_to(category.name)%>"><%= t("op.viewdetails")%> &raquo;</a>
 			</p>
-			<% if current_flyer %>
+			<% if authorized? %>
 			<p>
-				<a class="btn" href="#"><%= t("op.register")%> &raquo;</a>
+				<a class="btn" href="<%=new_item_path(:category => category.name)%>"><%= t("op.register")%> &raquo;</a>
 			</p>
 			<% end %>
 		</div><!-- /.span4 -->
@@ -103,6 +118,7 @@
 	<hr class="featurette-divider">
 
 	<div class="featurette" id="about">
+		<%= image_tag("card.jpg", :class => "image-resize300_200 img-polaroid" )%>
 		<h2 class="featurette-heading"><%= t("about_us.headline")%></h2>
 		<p class="lead">
 			<span class="muted"><%= t("about_us.leadline")%></span>

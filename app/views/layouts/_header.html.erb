@@ -7,7 +7,7 @@
 		<div class="navbar-inner">
 			<!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->
 			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
-			<a class="brand" href="<%=root_path(:locale => "en")%>"><%= t("brand.project")%></a>
+			<a class="brand" href="<%=root_path(:locale => "en")%>"><%= show_logo%></a>
 			<div class="nav-collapse collapse">
 				<ul class="nav">
 					<li class="active dropdown">
@@ -33,9 +33,6 @@
 						</ul>
 					</li>
 					<li>
-						<a href="#" id="to_about"><%=t("about")%></a>
-					</li>
-					<li>
 						<a href="#" id="to_shop_direct"><%=t("shop_direct")%></a>
 					</li>
 					<li>
@@ -50,6 +47,7 @@
 			</div><!--/.nav-collapse -->
 			<div class="nav-text pull-right">
 				<ul class="nav">
+					<!--
 					<li class="active">
 						<%= link_to(t("lang.en"),root_path(:locale => "en"))%>
 					</li>
@@ -59,6 +57,7 @@
 					<li>
 						<%= link_to(t("lang.ko"), root_path(:locale => "ko"))%>
 					</li>
+					-->
 					<% if current_flyer %>
 					<li>
 					<a href="<%=destroy_flyer_session_path%>"><%=t("auth.signout")%></a>

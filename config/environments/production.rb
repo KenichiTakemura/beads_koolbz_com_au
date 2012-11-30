@@ -64,4 +64,33 @@ BeadsKoolbzComAu::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+  
+  # Mail
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { :host => "bead.koolbz.com.au" }
+  config.action_mailer.smtp_settings = {
+    :address => 's3-singapore.accountservergroup.com',
+    :enable_starttls_auto => false,
+    :openssl_verify_mode => OpenSSL::SSL::VERIFY_NONE,
+    :authentication => :plain,
+    :user_name => 'do_not_reply@bead.koolbz.com.au',
+    :password => 'beadkoolbzisawesome2012!',
+  }
+
+  config.contact_mailer = {
+    :admin_email => "kenichi_takemura1976@yahoo.com",
+    :admin_email_locale => "en",
+    :is_debug => true
+  }
+  
+  config.security = {
+    :authorized => ["kenichi_takemura1976@yahoo.com","ohin.kwon@yahoo.com.au"]
+  }
+  
+ # Exception Handling
+  config.middleware.use ExceptionNotifier,
+    :email_prefix => "[Bead.KoolBz Exception] ",
+    :sender_address => %{"Bead.KoolBz" <do_not_reply@bead.koolbz.com.au>},
+    :exception_recipients => %w{kenichi_takemura1976@yahoo.com}
+
 end

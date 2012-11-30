@@ -1,0 +1,32 @@
+<table class="table">
+	<%= content_tag :thead do %>
+	<%= content_tag :tr do %>
+	<%= content_tag :th, t("item.id") %>
+	<%= content_tag :th, t("item.beads") %>
+	<%= content_tag :th, t("item.barcode") %>
+	<%= content_tag :th, t("item.price") %>
+	<%= content_tag :th, t("item.admin.sold_count") %>
+	<%= content_tag :th, t("item.admin.open_status") %>
+	<%= content_tag :th, t("item.admin.main_item") %>
+	<% end %>
+	<% end %>
+	<% @items.each_with_index do |item,i| %>
+	<%= content_tag :tr do %>
+	<%= content_tag :td, i+1 %>
+	<% if item.has_image? %>
+		<%= content_tag :td, image_tag(item.image.first.thumb_image, :class => "img-polaroid") %>
+	<% else %>
+		<%= content_tag :td, image_tag("noimg.gif", :class => "img-polaroid") %>
+	<% end %>
+	<%= content_tag :td, item.barcode %>
+	<%= content_tag :td, number_to_currency(item.price_ex_gst, :locale => "au") %>
+	<%= content_tag :td, item.sold_item.size %>
+	<%= content_tag :td, Status.get_open_status_str(item.open_status), :id => "open_#{item.id}" %>
+	<%= content_tag :td, item.main, :id => "main_#{item.id}" %>
+	<% end %>
+	<% func1 = Ajax.post("items/tap_open_status","d:#{item.id}") %>
+	<% func2 = Ajax.post("items/tap_main","d:#{item.id}") %>
+	<%= _mobile_tap("open_#{item.id}",func1)%>
+	<%= _mobile_tap("main_#{item.id}",func2)%>
+	<% end %>
+</table>

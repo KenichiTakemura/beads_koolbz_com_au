@@ -1,0 +1,4 @@
+<%=show_notice%>
+<%= _script(%Q|
+	window.location.href = "#{orders_path(:d => Enclink.param_enc(@order.id))}"
+|)%>

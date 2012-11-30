@@ -7,7 +7,7 @@
 		<div class="navbar-inner">
 			<!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->
 			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
-			<a class="brand" href="<%=root_path(:locale => "en")%>"><%= t("brand.project")%></a>
+			<a class="brand" href="<%=root_path(:locale => "en")%>"><%= show_logo%></a>
 			<div class="nav-collapse collapse">
 				<ul class="nav">
 					<li class="active dropdown">
@@ -34,11 +34,12 @@
 					</li>
 					<% if @mycart.present? %>
 					<li>
-						<a href="#" id="to_mycart"><%=t("cart.mycart")%>&nbsp;<span class="badge badge-info"><%=@mycart.item.size%></span></a>
+						<a href="<%=new_order_path%>" id="to_mycart"><%=t("cart.mycart")%>&nbsp;<span class="badge badge-info"><%=@mycart.item.size%></span></a>
 					</li>
-					<% end %
+					<% end %>
 				</ul>
 			</div><!--/.nav-collapse -->
+			<%= render :partial => "layouts/signedin" %>
 		</div><!-- /.navbar-inner -->
 	</div><!-- /.navbar -->
 

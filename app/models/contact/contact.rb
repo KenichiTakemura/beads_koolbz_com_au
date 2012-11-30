@@ -1,14 +1,14 @@
 class Contact < ActiveRecord::Base
 
   CONTACT_lIST = [
-    "contact.banner",
-    "contact.general",
-    "contact.feedback",
-    "contact.request",
-    "contact.issue",
-    "contact.career",
-    "contact.design",
-    "contact.buy"
+    "contact.contact_type.banner",
+    "contact.contact_type.general",
+    "contact.contact_type.feedback",
+    "contact.contact_type.request",
+    "contact.contact_type.issue",
+    "contact.contact_type.career",
+    "contact.contact_type.design",
+    "contact.contact_type.buy"
     ]
 
   DB_CONTACT_LENGTH = 65535

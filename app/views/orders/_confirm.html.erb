@@ -1,0 +1,19 @@
+<div class="modal hide fade" id="confirm_order_modal" tabindex="-1" role="dialog" aria-labelledby="confirm_order_modal_label" aria-hidden="true">
+	<div class="modal-header">
+		<h3 class="text-info"><%= t("op.confirm_order")%></h3>
+		<h6 class="muted"><%= t("order.noworries")%></h3>
+	</div>
+	<div class="modal-body" id="confirm_order_modal_body">
+		<%=image_tag("ajax-loader.gif")%>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">
+			<%= t("op.cancel")%>
+		</button>
+	</div>
+</div>
+<%= _script(%Q|
+	$('\#order-confirm').click(function(){
+		#{Ajax.post("/orders/confirm_order","")}
+	})
+|)%>

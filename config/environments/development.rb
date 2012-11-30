@@ -34,4 +34,24 @@ BeadsKoolbzComAu::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # Mail
+  config.action_mailer.default_url_options = { :host => "bead.koolbz.com.au" }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address              => "localhost",
+    :enable_starttls_auto => true  }
+  config.contact_mailer = {
+    :admin_email => "kenichi_takemura1976@yahoo.com",
+    :admin_email_locale => "en",
+    :is_debug => true
+  }
+  
+  config.security = {
+    :authorized => ["kenichi_takemura1976@yahoo.com","ohin.kwon@yahoo.com.au"]
+  }
+
+  # Disable assets log
+  config.assets.logger = false
+  
 end

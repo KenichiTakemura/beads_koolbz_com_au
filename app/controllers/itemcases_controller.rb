@@ -2,7 +2,7 @@ class ItemcasesController < CategoriesController
   
   layout "itemcase"
   
-  before_filter :_before_
+  before_filter :_before_, :except => [:clear_mycart,:order_count]
   
   def _before_
     raise "Bad Request" if params[:v].nil?
@@ -20,7 +20,7 @@ class ItemcasesController < CategoriesController
     @special = Category.special
     
     @category = Category.find_by_name(@@board)
-    @items = Item.category_for(@category)
+    @items = Item.for_sale(@category)
     logger.debug("@items: #{@items}")
     respond_to do |format|
       format.html
@@ -59,6 +59,31 @@ class ItemcasesController < CategoriesController
     end
     respond_to do |format|
       format.js
+    end
+  end
+  
+  def clear_mycart
+    if session[:mycart].present?
+      @items = @mycart.item
+      logger.debug("clear_mycart: #{@items}")
+      @mycart = ItemCheckout.fetch(session[:mycart])
+      @mycart.clear_order
+    end
+    respond_to do |format|
+      format.js
+    end    
+  end
+  
+  def order_count
+    @item = Item.find(params[:id])
+    @count = params[:count]
+    logger.debug("order_count #{@item} #{@count}")
+    if session[:mycart].present?
+      @mycart = ItemCheckout.fetch(session[:mycart])
+      @mycart.add_order(@item,@count)
+      if current_flyer
+        @mycart.by(current_flyer)
+      end
     end
   end
   

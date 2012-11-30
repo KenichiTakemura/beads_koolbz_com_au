@@ -1,42 +1,32 @@
-class ItemsController < ApplicationController
-  # GET /items
-  # GET /items.json
-  def index
-    if params[:status] && params[:status] != ''
-        # ignore category
-       @items = Item.where(:status_id => params[:status])
-    elsif params[:category] && params[:category] != ''
-      @items = Item.where(:category_id => params[:category])
-    else
-      @items = Item.all
-    end
-    @category = params[:category]
-    @status = params[:status]
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @items }
-    end
-  end
+class ItemsController < AuditsController
 
-  # GET /items/1
-  # GET /items/1.json
-  def show
-    @item = Item.find(params[:id])
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @item }
-    end
+  layout "item"
+  
+  before_filter :prepare
+  
+  def prepare
+    @categories = Category.all
+  end
+  
+  def index
+    @category = Category.find_by_name(params[:category])
+    @items = Item.category_for_all(@category)
   end
 
   # GET /items/new
   # GET /items/new.json
   def new
     @item = Item.new
-    @item.category_id  = params[:category] if params[:category]
-    @item.status_id = Status.find_by_name("In Stock")
+    raise Exceptions::BadRequestError unless params[:category].present?
+    category = Category.find_by_name(params[:category])
+    @item.category = category
+    @item.generate_barcode
+    @image = Image.new
+    @item.write_at = Common.current_time.to_i
+    @image.write_at = @item.write_at
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @item }
+      format.json { render :json =>  @item }
     end
   end
 
@@ -49,13 +39,37 @@ class ItemsController < ApplicationController
   # POST /items.json
   def create
     @item = Item.new(params[:item])
+    @images = Image.collect_image(current_flyer,@item.write_at)
+    logger.debug("create #{@images.size}")  
     respond_to do |format|
-      if @item.save
-        format.html { redirect_to items_path(:category => @item.category_id), notice: 'Item was successfully created.' }
-        format.json { render json: @item, status: :created, location: @item }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
+      begin
+        raise Exception.new(t("item.admin.image_required")) if !@images.present?
+        logger.debug("images present.")  
+        if @item.save
+          logger.debug("item saved. #{@item}")  
+          @images.each do |image|
+            image.attached_to_by(@item, current_flyer)
+          end
+          logger.debug("Delete unsaved images")  
+          # Delete unsaved images if any
+          Image.collect_image(current_flyer,@item.write_at).each do |image|
+            logger.info("Image to be deleted. #{image}")
+            image.destroy
+          end
+          logger.debug("create complete")  
+          format.html { redirect_to items_path(:category => @item.category.name), :notice => 'Item was successfully created.' }
+          format.json { render :json =>  @item, :status => :created, :location => @item }
+        else
+          @image = Image.new(:write_at => @item.write_at)
+          format.html { render :action => "new" }
+          format.json { render :json =>  @item.errors, :status => :unprocessable_entity }
+        end
+      rescue Exception => e
+        logger.error("something wrong e => #{$!}")
+        flash[:alert] = "#{$!}"
+        @image = Image.new(:write_at => @item.write_at)
+        format.html { render :action => "new" }
+        format.json { render :json =>  @item.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -79,43 +93,24 @@ class ItemsController < ApplicationController
         else
            logger.info("item is sold")
         end
-        format.html { redirect_to items_path(:category => @item.category_id), notice: 'Item was successfully updated.' }
+        format.html { redirect_to items_path(:category => @item.category_id), :notice => 'Item was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
+        format.html { render :action => "edit" }
+        format.json { render :json => @item.errors, :status => :unprocessable_entity }
       end
     end
   end
-
-  # DELETE /items/1
-  # DELETE /items/1.json
-  def destroy
-    @item = Item.find(params[:id])
-    @item.destroy
-
-    respond_to do |format|
-      format.html { redirect_to items_url }
-      format.json { head :no_content }
-    end
+  
+  # Smart Ajax
+  def tap_main
+    @item = Item.find(params[:d])
+    @item.update_attribute(:main, !@item.main)
   end
   
-  def upload
-    _file = params[:file]
-    logger.debug("original_filename: #{_file.original_filename}")
-    logger.debug("content_type: #{_file.content_type}")
-    logger.debug("tempfile: #{_file.tempfile.path}")
-    logger.debug("size: #{_file.size}")
-    _name = _file.original_filename
-    session[:upload_tmp_files] = _name
-    logger.debug("session[:upload_tmp_files]: #{session[:upload_tmp_files]}")    
-    data = request.raw_post
-    @file_content = File.open("#{Rails.root.to_s}/tmp/#{_name}", "wb") do |f| 
-      f.write(data)
-    end
-    item = Item.new(:avatar => _file)
-    item.save
-    #File.unlink("#{Rails.root.to_s}/tmp/#{_name}")
-    render :json => {:result => 'Success'}
+  def tap_open_status
+    @item = Item.find(params[:d])
+    @item.update_attribute(:open_status, Status.get_next_open_status(@item.open_status))
   end
+
 end

@@ -1,0 +1,5 @@
+<% if @order.errors.present? %>
+$("#confirm_order_modal_body").html("<%=escape_javascript(render 'orders/confirm_order')%>");
+<% else %>
+$("#confirm_order_modal_body").html("<%=escape_javascript(render 'orders/complete_order')%>");
+<% end %>

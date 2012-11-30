@@ -1,5 +1,5 @@
-<div class="container-fluid">
-	<div class="row-fluid shopping-cart" >
+<div class="container">
+	<div class="row shopping-cart" >
 		<p><span class="label label-info"><i class="icon-shopping-cart icon-white"></i><%=t("cart.mycart")%></span>
 			<span class="label" id="mycart_total_price">
 			<% if @mycart.present? && @mycart.item.present? %>
@@ -8,12 +8,14 @@
 				<%= t("cart.noitem")%>
 			<% end %>
 			</span>
+			<%=link_to_remote(t("op.clear_mycart"),"itemcases/clear_mycart","","")%>
 			<div id="mycart">
 			<%=show_cart(false)%>
 			</div>
 		</p>
 	</div>
-	<div class="row-fluid">
+	<% if @items.present? %>
+	<div class="row">
 		<div class="">
 			<!-- Carousel
 			================================================== -->
@@ -33,11 +35,16 @@
 			</div><!-- /.carousel -->
 		</div>
 	</div>
-	<div class="row-fluid">
+	<div class="row">
 		<div class="container">
 			<div class="span6" id="items_desc">
 				<%= show_itemdesc(@items.first)%>
 			</div>
 		</div>
 	</div>
+	<% else %>
+	<div class="row-fluid">
+		<p class="wall muted"><%= t("item.noiteminthesop") %></p>
+	</div>
+	<% end %>
 </div>

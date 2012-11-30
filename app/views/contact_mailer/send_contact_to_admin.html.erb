@@ -1,0 +1,21 @@
+<%= t("mail.contact.received_contact_message", :from => @contact.user_name)%>
+<br>
+<%= "#{t("mail.contact.name")} : #{@contact.user_name}" %>
+<br>
+<%= "#{t("mail.contact.email")} : #{@contact.email}" %>
+<br>
+<%= "#{t("mail.contact.phone")} : #{@contact.phone}" %>
+<br>
+<%= "-------------------------------------" %>
+<br>
+<%= "#{t("mail.contact.subject")} : #{@subject}" %>
+<br>
+<%= "-------------------------------------" %>
+<br>
+<%= "#{t("mail.contact.content")} : " %>
+<br>
+<%= "-------------------------------------" %>
+<br>
+<%= raw(@contact.body) %>
+<br>
+<%= "-------------------------------------" %>
