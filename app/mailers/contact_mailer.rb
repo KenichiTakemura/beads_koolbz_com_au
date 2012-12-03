@@ -7,13 +7,12 @@ class ContactMailer < ActionMailer::Base
   @@admin_email_locale = mail_config[:admin_email_locale]
   @@is_debug = mail_config[:is_debug]
   
-  def send_new_post_to_admin(heading, post)
+  def send_order_to_admin(order)
     to = @@admin_email
     I18n.with_locale(@@admin_email_locale) do
-      subject = "#{I18n.t("mail.admin.subject")}" + " [#{I18n.t("mail.admin.new_post")}] " + OzjapaneseStyle.heading_name(heading) + " ID: " + post.id.to_s
+      subject = "#{I18n.t("mail.admin.subject")}" + " [#{I18n.t("mail.admin.new_order")}]" + " ID: " + order.id.to_s
       logger.info("email is besing sent to #{to}")
-      @post = post
-      @heading = heading
+      @order = order
       mail(:to => to,
          :subject => subject)
     end
@@ -43,6 +42,19 @@ class ContactMailer < ActionMailer::Base
     #subject += @subject
     subject += t("mail.contact.confirmation_email")
     @contact = contact
+    mail(:to => to,
+         :subject => subject)
+  end
+  
+  def send_order_to_flyer(order)
+    to = order.order_info.email
+    if @@is_debug
+      to = @@admin_email
+    end
+    logger.info("email is besing sent to #{to}")
+    subject = "#{I18n.t("mail.flyer.subject")} "
+    subject += t("mail.order.confirmation_email")
+    @order = order
     mail(:to => to,
          :subject => subject)
   end

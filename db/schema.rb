@@ -71,10 +71,10 @@ ActiveRecord::Schema.define(:version => 20121120224900) do
 
   create_table "images", :force => true do |t|
     t.boolean  "is_deleted",                              :default => false
-    t.datetime "avatar_updated_at"
     t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
+    t.datetime "avatar_updated_at"
     t.integer  "avatar_file_size"
+    t.string   "avatar_content_type"
     t.string   "medium_size"
     t.string   "thumb_size"
     t.string   "original_size"

@@ -27,7 +27,7 @@ module ItemcasesHelper
   
   def show_checkout()
       if @mycart.present? && @mycart.item.present?
-        html = %Q|<a href="#{new_order_path}" >#{t("op.checkout")}</a>|
+        html = %Q|<a href="#{new_order_path}" class="btn btn-primary btn-small">#{t("op.checkout")}</a>|
       else
         html = ""
       end
@@ -49,7 +49,7 @@ module ItemcasesHelper
             html += show_item_outfocused(item)
           end
         else
-          html += %Q|<li class="span3 box_shadow box_opacity">|
+          html += %Q|<li class="span3 box_shadow box_opacity hidden-phone">|
           html += %Q|<h2 class="text-info text-center">#{item.barcode}|
         end
         html += "</h2>"

@@ -1,0 +1,14 @@
+<%= t("mail.order.received_message", :from => @order.order_info.user_name)%>
+<br>
+<%= "#{t("mail.contact.name")} : #{@order.order_info.user_name}" %>
+<br>
+<%= "#{t("mail.contact.email")} : #{@order.order_info.email}" %>
+<br>
+<%= "#{t("mail.contact.phone")} : #{@order.order_info.phone}" %>
+<br>
+<%= "#{t("order.total_price")} : #{@order.item_checkout.total_price}" %>
+<br>
+<% @order.item_history.each_with_index do |item,i| %>
+<%= "#{i}: #{item}" %>
+<br>
+<% end %>

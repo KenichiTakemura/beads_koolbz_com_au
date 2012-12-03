@@ -3,5 +3,8 @@
 		#{Ajax.post("/itemcases/order_count","id:select.id,count:select.value")}
 	}
 |)%>
+<%= _script_document_ready(%Q|
+	$('\#order-confirm-to-nonmodal').click(function(){$('html, body').animate({scrollTop: $("\#confirm_order_nonmodal").offset().top}, 2000);});
+|)%>
 
 

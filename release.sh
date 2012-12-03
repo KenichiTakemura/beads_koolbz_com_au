@@ -6,7 +6,10 @@ tar jcvf ./release/bead_koolbz_com_au_$DATE.tar.bz2\
  app/controllers\
  app/helpers\
  app/mailers\
- app/models\
+ app/models/*.rb\
+ app/models/attachable\
+ app/models/contact\
+ app/models/flyer\
  app/views\
  script\
  config/locales\
@@ -23,3 +26,6 @@ tar jcvf ./release/bead_koolbz_com_au_$DATE.tar.bz2\
  public/favicon.ico\
  public/robots.txt
 rm -rf public/assets
+cd ../prod_bead_koolbz_com_au
+./unpack.sh ../bead_koolbz_com_au/release/bead_koolbz_com_au_$DATE.tar.bz2
+cd -

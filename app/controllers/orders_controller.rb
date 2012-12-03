@@ -52,8 +52,8 @@ class OrdersController < CategoriesController
         end
         # Reset my cart
         session[:mycart] = nil
-        #ContactMailer.send_contact_to_admin(@contact).deliver
-        #ContactMailer.send_contact_to_flyer(@contact).deliver
+        ContactMailer.send_order_to_admin(@order).deliver
+        ContactMailer.send_order_to_flyer(@order).deliver
         flash[:notice] = I18n.t("order.complete")
         respond_to do |format|
           format.js

@@ -43,11 +43,14 @@ BeadsKoolbzComAu::Application.configure do
     :enable_starttls_auto => true  }
   config.contact_mailer = {
     :admin_email => "kenichi_takemura1976@yahoo.com",
+#    :admin_email => "ktakemur@localhost",
+
     :admin_email_locale => "en",
     :is_debug => true
   }
   
   config.security = {
+    :lock => false,
     :authorized => ["kenichi_takemura1976@yahoo.com","ohin.kwon@yahoo.com.au"]
   }
 

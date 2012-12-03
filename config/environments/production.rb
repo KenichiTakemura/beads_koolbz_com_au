@@ -84,6 +84,7 @@ BeadsKoolbzComAu::Application.configure do
   }
   
   config.security = {
+    :lock => true,
     :authorized => ["kenichi_takemura1976@yahoo.com","ohin.kwon@yahoo.com.au"]
   }
   

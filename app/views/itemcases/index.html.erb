@@ -1,6 +1,7 @@
 <div class="container">
 	<div class="row shopping-cart" >
-		<p><span class="label label-info"><i class="icon-shopping-cart icon-white"></i><%=t("cart.mycart")%></span>
+		<div class="row-fluid">
+		<span class="label label-info"><i class="icon-shopping-cart icon-white"></i><%=t("cart.mycart")%></span>
 			<span class="label" id="mycart_total_price">
 			<% if @mycart.present? && @mycart.item.present? %>
 				<%=show_total_price()%>
@@ -8,11 +9,19 @@
 				<%= t("cart.noitem")%>
 			<% end %>
 			</span>
-			<%=link_to_remote(t("op.clear_mycart"),"itemcases/clear_mycart","","")%>
+			<%=link_to_remote(t("op.clear_mycart"),"itemcases/clear_mycart","btn btn-primary btn-link","")%>
+
+		</div>
+		<div class="row-fluid">
 			<div id="mycart">
 			<%=show_cart(false)%>
 			</div>
-		</p>
+		</div>
+		<div class="row-fluid">
+			<span id="item-checkout" class="">
+				<%=show_checkout()%>
+			</span>
+		</div>
 	</div>
 	<% if @items.present? %>
 	<div class="row">

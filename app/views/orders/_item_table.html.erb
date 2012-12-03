@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table hidden-phone">
 	<%= content_tag :thead do %>
 	<%= content_tag :tr do %>
 	<%= content_tag :th, t("item.id") %>
@@ -12,7 +12,14 @@
 	<% cart.get_item.each_with_index do |item,i| %>
 	<%= content_tag :tr do %>
 	<%= content_tag :td, i+1 %>
-	<%= content_tag :td, image_tag(item.image.first.thumb_image, :class => "img-polaroid") %>
+	<% if cart.respond_to? :item_count %>
+		<%= content_tag :td, image_tag(item.image.first.thumb_image, :class => "img-polaroid") %>
+	<% else %>
+		<%= content_tag :td do %>
+		<%= image_tag(item.image.first.thumb_image, :class => "img-polaroid") %>
+		<div class="box_rotate ordered muted"><%=t("order.ordered")%></div>
+		<% end %>
+	<% end %>
 	<%= content_tag :td, item.barcode %>
 	<%= content_tag :td, number_to_currency(item.price_ex_gst, :locale => "au") %>
 	<%= content_tag :td do %>
@@ -23,10 +30,36 @@
 	<% end %>
 	<% end %>
 	<% if cart.respond_to? :item_count %>
-	<%= content_tag :td, number_to_currency(item.total_price(cart.item_count(item)), :locale => "au"), :id => "item_total_price_#{item.id}" %>
+	<%= content_tag :td, number_to_currency(item.total_price(cart.item_count(item)), :locale => "au"), :id => "item_total_price_desktop_#{item.id}" %>
 	<% else %>
 	<%= content_tag :td, number_to_currency(item.total_price, :locale => "au"), :id => "" %>
 	<% end %>
 	<% end %>
 	<% end %>
 </table>
+<%= content_tag :div, :class => "thumbnails visible-phone" do %>
+<% cart.get_item.each_with_index do |item,i| %>
+<%= content_tag :li, :class => "" do %>
+<%= content_tag :div, :class => "thumbnail" do %>
+<%= image_tag(item.image.first.medium_image, :class => "") %>
+<% if !cart.respond_to? :item_count %>
+<div class="box_rotate ordered muted"><%=t("order.ordered")%></div>
+<% end %>
+<%= content_tag :p, "#{t("item.barcode")} : #{item.barcode}" %>
+<%= content_tag :p, "#{t("item.price")} : #{number_to_currency(item.price_ex_gst, :locale => "au")}" %>
+<%= content_tag :p do %>
+<% if cart.respond_to? :item_count %>
+<%=t("item.order_count")%><%= select_tag :order_count, options_for_select([1,2,3,4,5], cart.item_count(item)), :multiple => false, :id => "#{item.id}", :onchange => "chgOrderCount(this)" %>
+<% else %>
+<%= item.order_count%>
+<% end %>
+<% end %>
+<% if cart.respond_to? :item_count %>
+<%= content_tag :p, "#{t("item.subtotal_price")} #{number_to_currency(item.total_price(cart.item_count(item)), :locale => "au")}", :id => "item_total_price_phone_#{item.id}" %>
+<% else %>
+<%= content_tag :p, "#{t("item.subtotal_price")} #{number_to_currency(item.total_price, :locale => "au")}", :id => "" %>
+<% end %>
+<% end %>
+<% end %>
+<% end %>
+<% end %>

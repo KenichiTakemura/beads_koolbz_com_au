@@ -27,7 +27,7 @@ class ItemHistory < ActiveRecord::Base
   end
   
   def to_s
-    "#{id} #{category.name} #{barcode} #{price_ex_gst}"
+    "#{id} #{category.name} #{barcode} #{price_ex_gst} #{order_count}"
   end
 
 end

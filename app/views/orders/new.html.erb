@@ -6,15 +6,22 @@
 
     <%= content_tag :div, :class => "btn-toolbar" do %>
     <%= content_tag :div, :class => "btn-group" do %>
-    <%= link_to_with_icon(t("op.cont_shopping"), "#{showcases_path}\#shop_online", "btn btn-primary", "", "icon-shopping-cart icon-white","")%>
+    <%= link_to_with_icon(t("op.cont_shopping"), "#{showcases_path}\#shop_online", "btn btn-primary btn-block", "", "icon-shopping-cart icon-white","")%>
     <% end %>
     <%= content_tag :div, :class => "btn-group" do %>
-    <%= link_to_modal(t("op.confirm"), "\#confirm_order_modal", "btn btn-primary", "", "icon-check icon-white","order-confirm")%>
+    <%= link_to_modal(t("op.confirm"), "\#confirm_order_modal", "btn btn-primary btn-block hidden-phone", "", "icon-check icon-white","order-confirm")%>
+	<% end %>
+    <%= content_tag :div, :class => "btn-group" do %>
+    <%= link_to_with_icon(t("op.confirm"), "#", "btn btn-primary btn-block visible-phone", "", "icon-check icon-white","order-confirm-to-nonmodal")%>
     <% end %>
 	<% end %>
 	</div>
 
 	<p class="text-success" id="order_total_price"><strong><%=t("order.total_price")%>&nbsp;<%=number_to_currency(@mycart.total_price, :locale => "au")%></strong></p>
+	<div class="row">
 	<%= render :partial => "orders/item_table", :locals => { :cart => @mycart } %>
+	</div>
 </div>
+<div class="row">
 <%= render :partial => "orders/confirm" %>
+</div>

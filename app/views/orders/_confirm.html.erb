@@ -1,7 +1,7 @@
 <div class="modal hide fade" id="confirm_order_modal" tabindex="-1" role="dialog" aria-labelledby="confirm_order_modal_label" aria-hidden="true">
 	<div class="modal-header">
 		<h3 class="text-info"><%= t("op.confirm_order")%></h3>
-		<h6 class="muted"><%= t("order.noworries")%></h3>
+		<h6 class="muted"><%= t("order.noworries")%></h6>
 	</div>
 	<div class="modal-body" id="confirm_order_modal_body">
 		<%=image_tag("ajax-loader.gif")%>
@@ -15,5 +15,16 @@
 <%= _script(%Q|
 	$('\#order-confirm').click(function(){
 		#{Ajax.post("/orders/confirm_order","")}
-	})
+	});
+	$('\#order-confirm-to-nonmodal').click(function(){
+		$('\#confirm_order_nonmodal').show();
+		#{Ajax.post("/orders/confirm_order","")}
+	});
 |)%>
+<div id="confirm_order_nonmodal" style="display:none">
+<h3 class="text-info"><%= t("op.confirm_order")%></h3>
+<h6 class="muted"><%= t("order.noworries")%></h6>
+<div id="confirm_order_modal_body_phone">
+<%=image_tag("ajax-loader.gif")%>
+</div>
+</div>
